@@ -4,9 +4,25 @@
 
 @author Robert Zdunek
 
-@document revision 0.1 (beta)
+@document revision 1.0
 
-@date 24.02.2026
+@date 25.02.2026
+
+# Table of Contents
+- [1. What is the S-Niffer?](#1-what-is-the-s-niffer) - This section introduces the S-Niffer project
+	- [1.1 Overview of the S-Niffer project](#11-overview-of-the-s-niffer-project)
+	- [1.2 S-Niffer photos](#12-s-niffer-photos)
+	- [1.3 Contents of the repository](#13-contents-of-the-repository)
+- [2. Hardware](#2-hardware) - This section presents the device design.
+	- [2.1 S-Niffer design](#21-s-niffer-design)
+	- [2.2 Calibration kit](#22-calibration-kit)
+	- [2.3 Mechanical design](#23-mechanical-design)
+- [3. Measurement Process](#3-measurement-process) - This section explains how to perform measurements using the S-Niffer and a VNA
+- [4. S-Niffer Verification](#4-s-niffer-verification) - This section presents verification of S-Niffer and conclusions
+	- [4.1 Verification Method](#41-verification-method)
+	- [4.2 Measurement results of the GCQ1555C1H470JB01 capacitor](#42-measurement-results-of-the-gcq1555c1h470jb01-capacitor)
+	- [4.3 Measurement results of the LQW15AN47NJ00 inductor](#43-measurement-results-of-the-lqw15an47nj00-inductor)
+	- [4.4 Conclusions](#44-conclusions)
 
 # 1. What is the S-Niffer?
 
@@ -20,37 +36,24 @@ S-Niffer enables [S-parameters](https://en.wikipedia.org/wiki/Scattering_paramet
 
 | schematic diagram | description |
 |------|------|
-| <img src="/doc/img/s-niffer_photos/s-niffer_oneport_sch.jpg?raw=true" width="100" /> | one-port network |
-| <img src="/doc/img/s-niffer_photos/s-niffer_shunt_sch.jpg?raw=true" width="100" /> | two-port network with parameters measured in shunt configuration |
-| <img src="/doc/img/s-niffer_photos/s-niffer_series_sch.jpg?raw=true" width="100" /> | two-port network with parameters measured in series configuration |
+| <img src="/doc/img/s-niffer_photos/s-niffer_oneport_sch.jpg?raw=true" width="100" /> | one-port network - a network with a single port, typically used for reflection measurements (S11) with a VNA |
+| <img src="/doc/img/s-niffer_photos/s-niffer_shunt_sch.jpg?raw=true" width="100" /> | two-port network with parameters measured in shunt configuration - a network with two accessible ports where measurements are performed in a shunt (parallel) setup, typically to determine S-parameters such as S21, S12, S11, and S22 |
+| <img src="/doc/img/s-niffer_photos/s-niffer_series_sch.jpg?raw=true" width="100" /> | two-port network with parameters measured in series configuration - a network with two accessible ports where measurements are performed in a series setup, typically to determine S-parameters such as S21, S12, S11, and S22 |
 
 ## 1.2 S-Niffer photos
 
 | photo | description |
 |------|------|
 | <img src="/doc/img/s-niffer_photos/s-niffer_photo1.jpg?raw=true" width="200" /> | - one-port network<br>- two-port network in shunt configuration<br>- two-port network in series configuration |
-| <img src="/doc/img/s-niffer_photos/s-niffer_photo2.jpg?raw=true" width="200" /> | - the measured component does not need to be soldered<br>- the component is held in place by a spring.  |
+| <img src="/doc/img/s-niffer_photos/s-niffer_photo2.jpg?raw=true" width="200" /> | - the measured component does not need to be soldered<br>- the component is held in place by a spring  |
 | <img src="/doc/img/s-niffer_photos/s-niffer_photo3.jpg?raw=true" width="200" /> | - it is possible to measure 0402(c), 0603(c), and 0805(c) components<br>- a 0402(c) component is shown next to this |
+| <img src="/doc/img/s-niffer_photos/s-niffer_photo4.jpg?raw=true" width="200" /> | - there are two PCBs: main PCB and hold-down clamp PCB<br>- the main PCB is a four-layer PCB |
+| <img src="/doc/img/s-niffer_photos/s-niffer_photo5.jpg?raw=true" width="200" /> | - calibration kit is available on the BOTTOM side of the main PCB<br>- SOLT (Short-Open-Load-Through) standards are available |
 
-## 1.3 Content of the README file
-
-- [2. Hardware](#2-hardware) section presents the device design.
-	- [2.1 S-Niffer design](#21-s-niffer-design)
-	- [2.2 Calibration kit](#22-calibration-kit)
-	- [2.3 Mechanical design](#23-mechanical-design)
-	- [2.4 Photos](#2.4-photos)
-- [3. Measurement Process](#3-measurement-process) section presents the measurement process
-- [4. S-Niffer Verification](#4-s-niffer-verification) section presents verification and conclusions
-	- [4.1 Verification Method](41-verification-method)
-	- [4.2 Measurement results of the GCQ1555C1H470JB01 capacitor](42-measurement-results-of-the-gcq1555c1h470jb01-capacitor)
-	- [4.3 Measurement results of the LQW15AN47NJ00 inductor](43-measurement-results-of-the-lqw15an47nj00-inductor)
-	- [4.4 Conclusions](44-conclusions)
-
-## 1.4 Contents of the repository 
+## 1.3 Contents of the repository 
 
 - \doc
-	- img\
-		- ...
+	- img\...
 - \hardware
 	- **S-Niffer_gerber.zip** - gerber files of the main board
 	- **S-Niffer_hold-down_clamp_gerber.zip** gerber files of the hold-down clamp
@@ -78,20 +81,20 @@ The project uses two PCBs: the main PCB and the hold-down clamp PCB. The main PC
 
 | photo | schematic diagram | configuration |
 |------|------|------|
-| <img src="/doc/img/hardware_photos/hardware_oneport.jpg?raw=true" width="200" /> | <img src="/doc/img/hardware_photos/hardware_oneport_sch.jpg?raw=true" width="150" /> | one-port network |
-| <img src="/doc/img/hardware_photos/hardware_shunt.jpg?raw=true" width="200" /> | <img src="/doc/img/hardware_photos/hardware_shunt_sch.jpg?raw=true" width="150" /> | two-port network with parameters measured in shunt configuration |
-| <img src="/doc/img/hardware_photos/hardware_series.jpg?raw=true" width="200" />| <img src="/doc/img/hardware_photos/hardware_series_sch.jpg?raw=true" width="150" /> | two-port network with parameters measured in series configuration |
+| <img src="/doc/img/hardware_photos/hardware_oneport.jpg?raw=true" width="200" /> | <img src="/doc/img/hardware_photos/hardware_oneport_sch.jpg?raw=true" width="150" /> | one-port network - a network with a single port, typically used for reflection measurements (S11) with a VNA |
+| <img src="/doc/img/hardware_photos/hardware_shunt.jpg?raw=true" width="200" /> | <img src="/doc/img/hardware_photos/hardware_shunt_sch.jpg?raw=true" width="150" /> | two-port network with parameters measured in shunt configuration - a network with two accessible ports where measurements are performed in a shunt (parallel) setup, typically to determine S-parameters such as S21, S12, S11, and S22 |
+| <img src="/doc/img/hardware_photos/hardware_series.jpg?raw=true" width="200" />| <img src="/doc/img/hardware_photos/hardware_series_sch.jpg?raw=true" width="150" /> | two-port network with parameters measured in series configuration - a network with two accessible ports where measurements are performed in a series setup, typically to determine S-parameters such as S21, S12, S11, and S22 |
 
 ## 2.2 Calibration kit
 
-The BOTTOM layer of the main PCB contains traces for building a [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration kit. The calibration kit allows performing SOLT (Short-Open-Load-Through) calibration:
+The BOTTOM layer of the main PCB contains traces for building a [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration kit. The calibration kit enables SOLT (Short-Open-Load-Through) calibration using calibration standards such as:
 
-| photo | configuration |
+| photo | calibration standards |
 |------|------|
-| <img src="/doc/img/hardware_photos/hadrware_cal_short.jpg?raw=true" width="200" /> | short |
-| <img src="/doc/img/hardware_photos/hadrware_cal_open.jpg?raw=true" width="200" /> | open |
-| <img src="/doc/img/hardware_photos/hadrware_cal_load.jpg?raw=true" width="200" /> | load |
-| <img src="/doc/img/hardware_photos/hadrware_cal_through.jpg?raw=true" width="200" /> | through |
+| <img src="/doc/img/hardware_photos/hadrware_cal_short.jpg?raw=true" width="200" /> | **Short** (S) – a short circuit used for reflection calibration |
+| <img src="/doc/img/hardware_photos/hadrware_cal_open.jpg?raw=true" width="200" /> | **Open** (O) – an open circuit at the reference plane |
+| <img src="/doc/img/hardware_photos/hadrware_cal_load.jpg?raw=true" width="200" /> | **Load** (L) - a termination matched to the characteristic impedance (50Ω) |
+| <img src="/doc/img/hardware_photos/hadrware_cal_through.jpg?raw=true" width="200" /> | **Through** (T) – an ideal connection between two ports, used for transmission calibration. |
 
 ## 2.3 Mechanical design 
 
@@ -99,28 +102,22 @@ The hold-down clamp PCB is a component of the S-Niffer and does not contain any 
 
 The S-Niffer is equipped with magnets in its feet, which allow secure attachment to a metal surface and convenient handling during measurements.
 
-## 2.4 Photos
-
-| photo | description |
-|------|------|
-| <img src="/doc/img/hardware_photos/hardware_photo1.jpg?raw=true" width="200" /> | the main PCB (TOP and BOTTOM side) and the hold-down clamp PCB |
-| <img src="/doc/img/hardware_photos/hardware_photo2.jpg?raw=true" width="200" /> | the TOP side of the main PCB implements a one-port network, a two-port network in shunt configuration, and a two-port network in series configuration. |
-| <img src="/doc/img/hardware_photos/hardware_photo3.jpg?raw=true" width="200" /> | the BOTTOM side of the main PCB implements the calibration kit for SOLT (Short-Open-Load-Through) calibration |
-
 # 3. Measurement Process
 
+This section explains how to perform measurements using the S-Niffer and a VNA.
+
 | photo | description |
 |------|------|
-| <img src="/doc/img/measurement_photos/measurement_photo1.jpg?raw=true" width="200" /> | STEP 1<br>Remember about [ESD](https://en.wikipedia.org/wiki/Electrostatic_discharge) protection. The [Vector Network Analyzer](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) is sensitive to electrostatic discharge. |
-| <img src="/doc/img/measurement_photos/measurement_photo2.jpg?raw=true" width="200" /> | STEP 2<br>Warm up your [Vector Network Analyzer](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) before measurements. |
-| <img src="/doc/img/measurement_photos/measurement_photo3.jpg?raw=true" width="200" /> | STEP 3.1<br>[VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration. Port 1 calibration with the **short** and port 2 calibration with the **open**. |
-| <img src="/doc/img/measurement_photos/measurement_photo4.jpg?raw=true" width="200" /> | STEP 3.2<br>[VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration. Port 1 calibration with a **load**. |
-| <img src="/doc/img/measurement_photos/measurement_photo5.jpg?raw=true" width="200" /> | STEP 3.3<br>[VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration. Port 1 and Port 2 calibration with the **through**. |
-| <img src="/doc/img/measurement_photos/measurement_photo6.jpg?raw=true" width="200" /> | STEP 3.4<br>[VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration. Port 1 calibration with the **open** and port 2 calibration with the **short**. |
-| <img src="/doc/img/measurement_photos/measurement_photo7.jpg?raw=true" width="200" /> | STEP 3.5<br>[VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration. Port 2 calibration with the **load**. |
-| <img src="/doc/img/measurement_photos/measurement_photo8.jpg?raw=true" width="200" /> | STEP 4.<br>Select the measurement configuration and connect the S-Niffer to the [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)). |
-| <img src="/doc/img/measurement_photos/measurement_photo9.jpg?raw=true" width="200" /> | STEP 5.<br>Place and secure the component to be measured. |
-|  | STEP 6.<br>Click the **Play** button on the [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) to start the measurement. |
+| <img src="/doc/img/measurement_photos/measurement_photo1.jpg?raw=true" width="200" /> | **STEP 1** Measurement Preparation<br>Remember about [ESD](https://en.wikipedia.org/wiki/Electrostatic_discharge) protection. All [Vector Network Analyzers](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) are sensitive to electrostatic discharge. |
+| <img src="/doc/img/measurement_photos/measurement_photo2.jpg?raw=true" width="200" /> | **STEP 2** Measurement Preparation<br>[Vector Network Analyzer](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) should be warmed up before measurements. |
+| <img src="/doc/img/measurement_photos/measurement_photo3.jpg?raw=true" width="200" /> | **STEP 3.1** [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration.<br>Port 1 calibration using a **short** standard and port 2 calibration using an **open** standard. |
+| <img src="/doc/img/measurement_photos/measurement_photo4.jpg?raw=true" width="200" /> | **STEP 3.2** [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration.<br>Port 1 calibration using a **load** standard. |
+| <img src="/doc/img/measurement_photos/measurement_photo5.jpg?raw=true" width="200" /> | **STEP 3.3** [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration.<br>Port 1 and port 2 calibration using a **through** standard. |
+| <img src="/doc/img/measurement_photos/measurement_photo6.jpg?raw=true" width="200" /> | **STEP 3.4** [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration.<br>Port 1 calibration using an **open** standard and port 2 calibration using a **short** standard. |
+| <img src="/doc/img/measurement_photos/measurement_photo7.jpg?raw=true" width="200" /> | **STEP 3.5** [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) calibration.<br>Port 2 calibration using a **load** standard. |
+| <img src="/doc/img/measurement_photos/measurement_photo8.jpg?raw=true" width="200" /> | **STEP 4** Measurement<br>Select the measurement configuration and connect the S-Niffer to the [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)). |
+| <img src="/doc/img/measurement_photos/measurement_photo9.jpg?raw=true" width="200" /> | **STEP 5** Measurement<br>Place and secure the component to be measured. |
+|  | **STEP 6** Measurement<br>Click a **Play** button on the [VNA](https://en.wikipedia.org/wiki/Network_analyzer_(electrical)) to start the measurement. |
 
 # 4. S-Niffer Verification
 
@@ -149,17 +146,17 @@ The comparison was performed using Python scripts, which compared the reference 
 
 | plots | description |
 |------|------|
-| <img src="/doc/verification/GCQ1555C1H470JB01.jpg?raw=true"/> | reference results |
-| <img src="/doc/verification/GCQ1555C1H470JB01_measured.jpg?raw=true"/> | results measured with the S-Niffer and LibreVNA |
-| <img src="/doc/verification/GCQ1555C1H470JB01_comparison.jpg?raw=true"/> | comparison of reference and measured values |
+| <img src="/doc/verification/GCQ1555C1H470JB01.jpg?raw=true"/> | reference results of the GCQ1555C1H470JB01 component (**GCQ1555C1H470JB01.s2p** [Touchstone file](https://en.wikipedia.org/wiki/Touchstone_file)) |
+| <img src="/doc/verification/GCQ1555C1H470JB01_measured.jpg?raw=true"/> | results measured with the S-Niffer and LibreVNA for the GCQ1555C1H470JB01 component (**GCQ1555C1H470JB01_measured.s2p** [Touchstone file](https://en.wikipedia.org/wiki/Touchstone_file)) |
+| <img src="/doc/verification/GCQ1555C1H470JB01_comparison.jpg?raw=true"/> | comparison of reference and measured values (**GCQ1555C1H470JB01.s2p** vs.**GCQ1555C1H470JB01_measured.s2p** [Touchstone files](https://en.wikipedia.org/wiki/Touchstone_file)) |
 
 ## 4.3 Measurement results of the LQW15AN47NJ00 inductor
 
 | plots | description |
 |------|------|
-| <img src="/doc/verification/LQW15AN47NJ00.jpg?raw=true"/> | reference results |
-| <img src="/doc/verification/LQW15AN47NJ00_measured.jpg?raw=true"/> | results measured with the S-Niffer and LibreVNA |
-| <img src="/doc/verification/LQW15AN47NJ00_comparison.jpg?raw=true"/> | comparison of reference and measured values |
+| <img src="/doc/verification/LQW15AN47NJ00.jpg?raw=true"/> | reference results of the LQW15AN47NJ00 component (**LQW15AN47NJ00.s2p** [Touchstone file](https://en.wikipedia.org/wiki/Touchstone_file)) |
+| <img src="/doc/verification/LQW15AN47NJ00_measured.jpg?raw=true"/> | results measured with the S-Niffer and LibreVNA for the LQW15AN47NJ00 component (**LQW15AN47NJ00_measured.s2p** [Touchstone file](https://en.wikipedia.org/wiki/Touchstone_file)) |
+| <img src="/doc/verification/LQW15AN47NJ00_comparison.jpg?raw=true"/> | comparison of reference and measured values (**LQW15AN47NJ00.s2p** vs.**LQW15AN47NJ00_measured.s2p** [Touchstone files](https://en.wikipedia.org/wiki/Touchstone_file)) |
 
 ## 4.4 Conclusions
 
